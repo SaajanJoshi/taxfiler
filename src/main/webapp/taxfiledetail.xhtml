@@ -7,6 +7,7 @@
 <h:head>
    <title>Tax File Detail Page</title>
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
    <style>
       body {
          background-color: #f8f9fa;
@@ -19,13 +20,26 @@
       .table-container {
          margin-top: 20px;
       }
+
+      .user-info {
+         position: absolute;
+         top: 10px;
+         right: 10px;
+         display: flex;
+         align-items: center;
+      }
+
+      .user-info i {
+         margin-right: 5px;
+      }
    </style>
 </h:head>
 
 <h:body>
    <div class="container taxfile-detail-container">
-      <!-- Logout Button at the Top -->
-      <div class="text-right mt-2">
+      <div class="user-info">
+         <i class="fas fa-user"></i>
+         <h:outputText value="#{loginBean.loggedInUser.firstName}" styleClass="mr-2" />
          <h:form>
             <h:commandButton value="Logout" action="#{loginBean.logout}" class="btn btn-danger" />
          </h:form>

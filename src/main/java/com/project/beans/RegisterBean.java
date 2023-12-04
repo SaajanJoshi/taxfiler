@@ -77,7 +77,7 @@ public class RegisterBean implements Serializable {
         newUser.setEmail(email);
 
         if (userDAO.registerUser(newUser)) {
-            return "success"; // Redirect to a success page
+            return "login?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registration failed", null));
             return null;
