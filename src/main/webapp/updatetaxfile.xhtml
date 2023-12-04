@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+   <title>Update Tax File</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+   <style>
+      body {
+         background-color: #f8f9fa;
+      }
+
+      .update-taxfile-container {
+         margin-top: 5%;
+      }
+   </style>
+</h:head>
+
+<h:body>
+   <div class="container update-taxfile-container">
+      <div class="row justify-content-center">
+         <div class="col-md-8">
+            <div class="card">
+               <div class="card-body">
+                  <h:form>
+                     <div class="text-center mb-4">
+                        <h1 class="h3 mb-3 font-weight-normal">Update Tax File</h1>
+                     </div>
+                     <h:inputText id="filterid" value="#{taxFileBean.selectedTaxFile.filerID}" class="form-control" type="hidden"/>
+                     <div class="form-group">
+                        <label for="contact">Contact:</label>
+                        <h:inputText id="contact" value="#{taxFileBean.selectedTaxFile.contact}" class="form-control"/>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="annualIncome">Annual Income:</label>
+                        <h:inputText id="annualIncome" value="#{taxFileBean.selectedTaxFile.annualIncome}" class="form-control"/>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="expenses">Expenses:</label>
+                        <h:inputText id="expenses" value="#{taxFileBean.selectedTaxFile.expenses}" class="form-control"/>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="taxYear">Tax Year:</label>
+                        <h:inputText id="taxYear" value="#{taxFileBean.selectedTaxFile.taxYear}" class="form-control"/>
+                     </div>
+
+                     <div class="mt-4">
+                        <h:commandButton value="Update" action="#{taxFileBean.updateTaxFile}" class="btn btn-primary btn-block"/>
+                     </div>
+                  </h:form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</h:body>
+</html>

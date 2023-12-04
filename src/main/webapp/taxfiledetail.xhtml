@@ -74,6 +74,14 @@
                               <f:facet name="header">Tax Year</f:facet>
                               #{taxFile.taxYear}
                            </h:column>
+                           <h:column>
+                              <f:facet name="header">Actions</f:facet>
+                              <h:commandLink value="Update" action="#{taxFileBean.prepareUpdate(taxFile)}"
+                                             styleClass="btn btn-warning btn-sm" />
+                              <h:commandLink value="Delete" action="#{taxFileBean.deleteTaxFile(taxFile)}"
+                                             styleClass="btn btn-danger btn-sm"
+                                             onclick="return confirm('Are you sure you want to delete this tax file?');" />
+                           </h:column>
                         </h:dataTable>
                      </div>
 

@@ -29,6 +29,8 @@ public class TaxFileBean {
     private int taxYear;
     private User currentUser;
 
+    private TaxFiler selectedTaxFile;
+
     // List to store existing tax files
     private List<TaxFiler> taxFiles = new ArrayList<>();
 
@@ -110,6 +112,14 @@ public class TaxFileBean {
         this.taxFiles = taxFiles;
     }
 
+    public TaxFiler getSelectedTaxFile() {
+        return selectedTaxFile;
+    }
+
+    public void setSelectedTaxFile(TaxFiler selectedTaxFile) {
+        this.selectedTaxFile = selectedTaxFile;
+    }
+
     // Method to create a new tax file
     public String createNewTaxFile() {
         // Validate input if necessary
@@ -130,4 +140,33 @@ public class TaxFileBean {
 
         return "taxfiledetail?faces-redirect=true"; // Redirect to a success
     }
+
+    public String prepareUpdate(TaxFiler taxFile) throws IOException {
+        // Set the selectedTaxFile with the values of the selected row
+        setSelectedTaxFile(new TaxFiler(taxFile.getFilerID(),
+                taxFile.getContact(),
+                taxFile.getAnnualIncome(),
+                taxFile.getExpenses(),
+                taxFile.getTaxYear(),
+                taxFile.getUserId())); // Assuming TaxFile has a copy constructor
+
+        return "updatetaxfile?faces-redirect=true";
+    }
+    public String updateTaxFile() throws IOException {
+        // Call the service or repository to update the tax file
+        TaxFilerDAO taxFilerDAO = new TaxFilerDAO();
+        taxFilerDAO.updateTaxFiler(selectedTaxFile);
+        // Redirect to the tax file details page or any other page
+
+        return "taxfiledetail?faces-redirect=true";
+    }
+
+    public String deleteTaxFile(TaxFiler taxFile) throws IOException {
+        // Call the service or repository to delete the tax file
+        TaxFilerDAO taxFilerDAO = new TaxFilerDAO();
+        taxFilerDAO.deleteTaxFiler(taxFile.getFilerID());
+
+        return "taxfiledetail?faces-redirect=true"; // Redirect to a success
+    }
+
 }

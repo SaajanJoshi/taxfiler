@@ -42,6 +42,15 @@ public class TaxFiler implements Serializable {
         this.userId = currentUser;
     }
 
+    public TaxFiler(int filerID, String contact, BigDecimal annualIncome, BigDecimal expenses, Integer taxYear, int userId) {
+        this.filerID = filerID;
+        this.contact = contact;
+        this.annualIncome = annualIncome;
+        this.expenses = expenses;
+        this.taxYear = taxYear;
+        this.userId = userId;
+    }
+
     public int getFilerID() {
         return filerID;
     }
