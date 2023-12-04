@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+   <title>Register Page</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+   <style>
+      body {
+         background-color: #f8f9fa;
+      }
+
+      .register-container {
+         margin-top: 5%;
+      }
+
+      .form-label {
+         text-align: left;
+         font-weight: bold;
+         margin-bottom: 5px;
+      }
+   </style>
+</h:head>
+
+<h:body>
+   <div class="container register-container">
+      <div class="row justify-content-center">
+         <div class="col-md-6 col-lg-4">
+            <div class="card">
+               <div class="card-body">
+                  <h:form>
+                     <div class="text-center mb-4">
+                        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <h:inputText id="firstName" value="#{registerBean.firstName}" class="form-control" required="true" />
+                     </div>
+
+                     <div class="form-group">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <h:inputText id="lastName" value="#{registerBean.lastName}" class="form-control" required="true" />
+                     </div>
+
+                     <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <h:inputText id="username" value="#{registerBean.username}" class="form-control" required="true" />
+                     </div>
+
+                     <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <h:inputText id="email" value="#{registerBean.email}" class="form-control" required="true" />
+                     </div>
+
+                     <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <h:inputSecret id="password" value="#{registerBean.password}" class="form-control" required="true" />
+                     </div>
+
+                     <div class="mt-4">
+                        <h:commandButton value="Register" action="#{registerBean.register}" class="btn btn-primary btn-block" />
+                     </div>
+
+                     <div class="text-center mt-3">
+                        <small>Already have an account? <a href="login.xhtml">Login here</a></small>
+                     </div>
+                  </h:form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</h:body>
+
+</html>
