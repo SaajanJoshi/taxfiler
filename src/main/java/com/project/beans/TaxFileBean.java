@@ -126,6 +126,7 @@ public class TaxFileBean {
 
         this.currentUser = loginBean.getLoggedInUser();
 
+
         if (this.currentUser == null){
             return "login?faces-redirect=true";
         }
@@ -137,6 +138,8 @@ public class TaxFileBean {
 
         TaxFilerDAO taxFilerDAO = new TaxFilerDAO();
         taxFilerDAO.addTaxFiler(newTaxFile);
+
+        resetvalue();
 
         return "taxfiledetail?faces-redirect=true"; // Redirect to a success
     }
@@ -158,7 +161,17 @@ public class TaxFileBean {
         taxFilerDAO.updateTaxFiler(selectedTaxFile);
         // Redirect to the tax file details page or any other page
 
+
+        resetvalue();
         return "taxfiledetail?faces-redirect=true";
+    }
+
+    public void resetvalue (){
+        // Reset values
+        contact = null;
+        annualIncome = null; // You can set this to the default value for annual income
+        expenses = null; // You can set this to the default value for expenses
+        taxYear = 0; // You
     }
 
     public String deleteTaxFile(TaxFiler taxFile) throws IOException {
