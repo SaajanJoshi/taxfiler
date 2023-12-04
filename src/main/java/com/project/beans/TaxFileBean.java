@@ -7,6 +7,9 @@ import com.project.model.User;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,9 +67,26 @@ public class TaxFileBean {
     }
 
     public List<TaxFiler> getTaxFiles() {
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+
+        if (facesContext.getResponseComplete()) {
+            return null; // Response is already complete, return null
+        }
+
         TaxFilerDAO taxFilerDAO = new TaxFilerDAO();
-        System.out.println(loginBean.getLoggedInUser().getUserID());
-        taxFiles = taxFilerDAO.getTaxFilesForUser(loginBean.getLoggedInUser().getUserID());
+        this.currentUser= loginBean.getLoggedInUser();
+        if (this.currentUser==null){
+            // Redirect to the login page
+            try {
+                externalContext.redirect(externalContext.getRequestContextPath() + "/login.xhtml");
+            } catch (IOException e) {
+                e.printStackTrace(); // Handle the exception as needed
+            }
+            return null; // Return null since the redirect has already occurred
+        }
+        taxFiles = taxFilerDAO.getTaxFilesForUser(this.currentUser.getUserID());
         return taxFiles;
     }
 
@@ -95,6 +115,10 @@ public class TaxFileBean {
         // Validate input if necessary
 
         this.currentUser = loginBean.getLoggedInUser();
+
+        if (this.currentUser == null){
+            return "login?faces-redirect=true";
+        }
         // Create a new tax file
         TaxFiler newTaxFile = new TaxFiler(contact, annualIncome, expenses, taxYear, this.currentUser.getUserID());
 

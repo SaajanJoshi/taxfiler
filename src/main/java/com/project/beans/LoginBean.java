@@ -71,4 +71,9 @@ public class LoginBean implements Serializable {
             return null;
         }
     }
+
+    public String logout(){
+        loggedInUser = null;
+        return "login?faces-redirect=true";
+    }
 }
